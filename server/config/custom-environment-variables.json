@@ -1,0 +1,5 @@
+{
+  "mongoURI": "Ryyd_mongoDB",
+  "jwtPrivateKey": "Ryyd_jwtPrivateKey",
+  "clientEndPoint": "Ryyd_dev_client_url"
+}
