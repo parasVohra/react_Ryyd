@@ -25,11 +25,6 @@ class SearchRide extends Form {
     console.log(moment().format("ll"));
   }
 
-  selectedRide(index) {
-    console.log("clicked selected");
-    this.props.selectedRides(index);
-  }
-
   schema = {
     from: Joi.string().min(3).max(255).required().label("From"),
     to: Joi.string().min(3).max(255).required().label("To"),

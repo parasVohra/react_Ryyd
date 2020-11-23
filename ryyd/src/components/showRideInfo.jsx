@@ -5,26 +5,17 @@ import { Component } from "react";
 class RideInfo extends Component {
   render() {
     console.log(this.props);
-    this.props.selectedRide(this.props.location.state.index);
-    console.log(this.props.ride.selectedRide);
-    const selectedRideIndex = this.props.ride.selectedRide;
+    const selectedRideIndex = this.props.location.state.index;
     const ride = this.props.ride.searchedRide[selectedRideIndex];
-    console.log(ride);
     return (
       <div>
         <div className="row justify-content-md-center my-3">
-          <div
-            className="card col-md-8 col-sm-10 shadow"
-            style={{ height: "500px" }}
-          >
+          <div className="card col-md-8 col-sm-10 shadow">
             <div className="card-title my-2 mx-3 text-primary row">
               <div className="col">
                 Departure: {ride.date} at {ride.time}
               </div>
               <div className="col">Phone Number : 5196140966</div>
-              <button variant="primary" className="btn btn-primary col">
-                Send Email
-              </button>
             </div>
 
             <div className="card-body row">
@@ -53,6 +44,9 @@ class RideInfo extends Component {
             </div>
             <div>Vehicle details</div>
             <div>Name: Mazda Color: White Seats: 5</div>
+            <button variant="primary" className="btn btn-primary col">
+              Send Email
+            </button>
           </div>
         </div>
       </div>
@@ -64,12 +58,4 @@ const mapStateToProps = state => ({
   ride: state.ride,
 });
 
-const mapDispatchToProps = dispatch => ({
-  selectedRide: index =>
-    dispatch({
-      type: "selectedRide",
-      payload: index,
-    }),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(RideInfo);
+export default connect(mapStateToProps)(RideInfo);
