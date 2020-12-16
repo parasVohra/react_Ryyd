@@ -21,9 +21,7 @@ class SearchRide extends Form {
 
   date = moment().format("L");
 
-  componentDidMount() {
-    console.log(moment().format("ll"));
-  }
+  componentDidMount() {}
 
   schema = {
     from: Joi.string().min(3).max(255).required().label("From"),
@@ -37,6 +35,10 @@ class SearchRide extends Form {
       const response = await rideService.searchRides(searchData);
       this.props.requestedRide();
       this.props.searchedRide(response.data);
+
+      console.log(response.data);
+      //Save searched data to local storage
+      localStorage.setItem("searchedRides", JSON.stringify(response.data));
     } catch (ex) {
       const errors = { ...this.state.errors };
       errors.from = ex.response;

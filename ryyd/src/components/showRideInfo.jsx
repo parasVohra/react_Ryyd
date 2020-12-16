@@ -3,10 +3,20 @@ import { connect } from "react-redux";
 import { Component } from "react";
 
 class RideInfo extends Component {
+  state = {
+    data: "",
+  };
+
   render() {
+    let hasSearchData = localStorage.getItem("searchedRides");
+    const localData = JSON.parse(hasSearchData);
     console.log(this.props);
+
     const selectedRideIndex = this.props.location.state.index;
-    const ride = this.props.ride.searchedRide[selectedRideIndex];
+    // const ride = this.props.ride.searchedRide[selectedRideIndex];
+    console.log(this.state);
+    const ride = localData[selectedRideIndex];
+
     return (
       <div>
         <div className="row justify-content-md-center my-3">
@@ -15,7 +25,7 @@ class RideInfo extends Component {
               <div className="col">
                 Departure: {ride.date} at {ride.time}
               </div>
-              <div className="col">Phone Number : 5196140966</div>
+              <div className="col">Phone Number : {ride.phoneNumber}</div>
             </div>
 
             <div className="card-body row">
@@ -44,8 +54,16 @@ class RideInfo extends Component {
             </div>
             <div>Vehicle details</div>
             <div>Name: Mazda Color: White Seats: 5</div>
-            <button variant="primary" className="btn btn-primary col">
+            <button variant="primary" className="btn btn-primary col-3">
               Send Email
+            </button>
+
+            <button
+              href={"sms:+1 " + ride.phoneNumber}
+              variant="primary"
+              className="btn btn-primary col-3"
+            >
+              Send Text
             </button>
           </div>
         </div>
@@ -58,4 +76,14 @@ const mapStateToProps = state => ({
   ride: state.ride,
 });
 
-export default connect(mapStateToProps)(RideInfo);
+const mapDispatchToProps = dispatch => ({
+  searchedRide: ride =>
+    dispatch({
+      type: "searchedRide",
+      payload: { message: ride },
+    }),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RideInfo);
+
+//export default connect(mapStateToProps)(RideInfo);
