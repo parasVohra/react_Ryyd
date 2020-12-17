@@ -3,6 +3,7 @@ import Form from "../common/form";
 import Joi from "@hapi/joi";
 import rideService from "../services/rideService";
 import auth from "../services/authService";
+import Popup from "../services/utilityService";
 
 class OfferRide extends Form {
   state = {
@@ -43,6 +44,13 @@ class OfferRide extends Form {
     try {
       const response = await rideService.publishRide(publishData);
       console.log(response);
+      if (response.status === 200) {
+        Popup.showPopup(
+          this.props,
+          "Ride is successfully published",
+          "/dashboard"
+        );
+      }
       this.props.history.push("/dashboard");
     } catch (ex) {
       const errors = { ...this.state.errors };
