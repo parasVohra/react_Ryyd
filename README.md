@@ -1,5 +1,3 @@
 # react_Ryyd
 
-// export Ryyd_mongoDB='mongodb+srv://paras966:parasvohra966@cluster0-jjlz1.mongodb.net/Ryyd?retryWrites=true'
-// export Ryyd_jwtPrivateKey='jwtPrivateKey'
-// export Ryyd_dev_client_url='http://localhost:5001/api'
+Ryyd is a React Web Application which am building in oder to provide community a platform where users can offer carpooling rides and users can also search for rides options for inter-city commute.

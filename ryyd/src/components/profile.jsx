@@ -16,36 +16,39 @@ class Profile extends Component {
     return (
       <Provider store={store}>
         <div>
-          <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
+          <Tab.Container
+            id="list-group-tabs-example"
+            defaultActiveKey="#profileInfo"
+          >
             <Row>
               <Col sm={4}>
                 <ListGroup>
-                  <ListGroup.Item action href="#link1">
-                    Personal Info
+                  <ListGroup.Item action href="#profileInfo">
+                    Profile Info
                   </ListGroup.Item>
-                  <ListGroup.Item action href="#link2">
+                  <ListGroup.Item action href="#car">
                     Car
                   </ListGroup.Item>
-                  <ListGroup.Item action href="#link3">
+                  <ListGroup.Item action href="#rideOffered">
                     Ride Offered
                   </ListGroup.Item>
-                  <ListGroup.Item action href="#link4">
+                  <ListGroup.Item action href="#rideTaken">
                     Ride Taken
                   </ListGroup.Item>
                 </ListGroup>
               </Col>
               <Col sm={8}>
                 <Tab.Content>
-                  <Tab.Pane eventKey="#link1">
+                  <Tab.Pane eventKey="#profileInfo">
                     <UserInfo />
                   </Tab.Pane>
-                  <Tab.Pane eventKey="#link2">
+                  <Tab.Pane eventKey="#car">
                     <CarInfo />
                   </Tab.Pane>
-                  <Tab.Pane eventKey="#link3">
+                  <Tab.Pane eventKey="#rideOffered">
                     <RideOffered />
                   </Tab.Pane>
-                  <Tab.Pane eventKey="#link4">
+                  <Tab.Pane eventKey="#rideTaken">
                     <RideTaken />
                   </Tab.Pane>
                 </Tab.Content>
