@@ -34,7 +34,7 @@ class ResetPassword extends Form {
   }
 
   render() {
-    let user = jwtDecode(this.props.match.params.token);
+    //let user = jwtDecode(this.props.match.params.token);
     return (
       <div className="row">
         <div>

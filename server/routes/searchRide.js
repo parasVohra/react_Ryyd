@@ -9,6 +9,7 @@ router.post("/", async (req, res) => {
   let rides = await PublishRide.find({
     from: data.from,
     to: data.to,
+    date: { $gte: data.fromDate, $lte: data.toDate },
     //date: { $gt: data.date },
   });
   if (!rides) return res.status(400).send("No rides available");

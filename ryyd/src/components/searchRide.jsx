@@ -7,26 +7,30 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import { connect } from "react-redux";
 import { searchedRide } from "../store/rides";
+import { DateInput } from "../common/input";
+import { detect } from "detect-browser";
 
 class SearchRide extends Form {
   state = {
     data: {
-      from: "London",
-      to: "Toronto",
-      date: "",
+      from: "",
+      to: "",
+      fromDate: "",
+      toDate: "",
     },
     searchData: "",
     errors: {},
   };
 
-  date = moment().format("L");
+  date = moment().format("YYYY-MM-DD");
 
   componentDidMount() {}
 
   schema = {
     from: Joi.string().min(3).max(255).required().label("From"),
     to: Joi.string().min(3).max(255).required().label("To"),
-    date: Joi.date().required().label("Date"),
+    fromDate: Joi.date().required().label("From Date"),
+    toDate: Joi.date().required().label("To Date"),
   };
 
   async doSubmit() {
@@ -48,6 +52,7 @@ class SearchRide extends Form {
 
   render() {
     const rideList = this.props.ride.searchedRide;
+    const browser = detect();
     let message;
     if (rideList) {
       if (rideList.length === 0) {
@@ -87,9 +92,11 @@ class SearchRide extends Form {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput("from", "From")}
-          {this.renderInput("to", "To")}
-          {this.renderInput("date", "Date", "date", "")}
+          {/* {this.renderInput("from", "From")} */}
+          {this.renderCitySelect("from", "From")}
+          {this.renderCitySelect("to", "To")}
+          {this.DateInput("fromDate", "From Date")}
+          {this.DateInput("toDate", "To Date")}
           {this.renderButton("Search")}
         </form>
         <div>{message}</div>

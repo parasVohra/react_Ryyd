@@ -24,7 +24,7 @@ class OfferRide extends Form {
     from: Joi.string().min(3).max(255).required().label("From"),
     to: Joi.string().min(3).max(255).required().label("To"),
     stops: Joi.string().min(3).max(255).label("Stops"),
-    date: Joi.date().greater("now").required().label("Date"),
+    date: Joi.date().required().label("Date"),
     time: Joi.string().required().label("Time"),
     seats: Joi.number().min(1).max(7).required().label("Seat"),
     price: Joi.number().required().label("Price"),
@@ -64,10 +64,10 @@ class OfferRide extends Form {
       <div className="container-sm">
         <h1>Offer Ride</h1>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput("from", "From")}
-          {this.renderInput("to", "To")}
+          {this.renderCitySelect("from", "From")}
+          {this.renderCitySelect("to", "To")}
           {this.renderInput("stops", "Additional Stops")}
-          {this.renderInput("date", "Date of Journey", "date")}
+          {this.DateInput("date", "Date of Journey")}
           {this.renderInput("time", "Time", "time")}
           {this.renderInput("seats", "No. of seats", "number")}
           {this.renderInput("price", "Price per seat", "number")}

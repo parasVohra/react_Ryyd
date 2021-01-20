@@ -6,6 +6,7 @@ import AutoCompleteCity from "../common/autoComplete";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import city from "./cc.json";
 import TextField from "@material-ui/core/TextField";
+import moment from "moment";
 
 class Form extends Component {
   state = {
@@ -13,10 +14,14 @@ class Form extends Component {
     errors: {},
   };
 
+  //defining current date for DateInput min prop
+  date = moment().format("YYYY-MM-DD");
+
   validate = () => {
     const options = { abortEarly: false };
     const Schema = Joi.object().keys(this.schema);
     const { error } = Schema.validate(this.state.data, options);
+    console.log(this.state.data);
 
     if (!error) return null;
     const errors = {};
@@ -76,6 +81,34 @@ class Form extends Component {
     );
   };
 
+  DateInput = (
+    inputName,
+    label,
+    type = "date",
+    min = this.date,
+    max,
+    ...rest
+  ) => {
+    const { data, errors } = this.state;
+    return (
+      <div className="form-group">
+        <label htmlFor={inputName}>{label}</label>
+        <input
+          name={inputName}
+          value={data[inputName]}
+          id={inputName}
+          type={type}
+          min={min}
+          max={max}
+          onChange={this.handleChange}
+          className="form-control"
+          {...rest}
+          placeholder="dd-mm-yyyy"
+        />
+      </div>
+    );
+  };
+
   renderSelect = (name, label, options) => {
     const { data, errors } = this.state;
     return (
@@ -90,9 +123,8 @@ class Form extends Component {
     );
   };
 
-  renderCitySelect = (name, label, error) => {
+  renderCitySelect = (name, label) => {
     const { data, errors } = this.state;
-    console.log(data);
     const defaultProps = {
       options: city,
       getOptionLabel: options => options.City,
@@ -102,6 +134,7 @@ class Form extends Component {
         <Autocomplete
           {...defaultProps}
           id="clear-on-scape"
+          onChange={(event, value) => (value ? (data[name] = value.City) : "")}
           clearOnEscape
           autoSelect
           renderInput={params => (
@@ -109,18 +142,16 @@ class Form extends Component {
               {...params}
               inputProps={{
                 ...params.inputProps,
-                autoComplete: "new-password",
+                autoComplete: "off",
               }}
               name={name}
               onChange={this.handleChange}
               label={label}
-              error={errors[name]}
               margin="normal"
-              value={data[name]}
+              error={errors ? false : true}
             />
           )}
         />
-        {error && <div className="alert alert-danger">{error}</div>}
       </div>
     );
   };

@@ -19,7 +19,7 @@ class RequestRide extends Form {
   schema = {
     from: Joi.string().min(3).max(255).required().label("From"),
     goingTo: Joi.string().min(3).max(255).required().label("To"),
-    date: Joi.date().greater("now").required().label("Date"),
+    date: Joi.date().required().label("Date"),
     time: Joi.string().required().label("Time"),
   };
 
@@ -50,8 +50,8 @@ class RequestRide extends Form {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput("from", "From")}
-          {this.renderInput("goingTo", "To")}
+          {this.renderCitySelect("from", "From")}
+          {this.renderCitySelect("goingTo", "To")}
           {this.renderInput("date", "Date of Journey", "date")}
           {this.renderInput("time", "Time", "time")}
           {this.renderButton("Drop Ride Request")}
